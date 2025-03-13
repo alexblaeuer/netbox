@@ -149,9 +149,9 @@ class GetReturnURLMixin:
 
         # Attempt to dynamically resolve the list view for the object
         if hasattr(self, 'queryset'):
-            model_opts = self.queryset.model._meta
+            viewname = get_viewname(self.queryset.model)
             try:
-                return reverse(f'{model_opts.app_label}:{model_opts.model_name}_list')
+                return reverse(f'{viewname}_list')
             except NoReverseMatch:
                 pass
 
